@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MiniChat AI</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="chat-container">
+        <!-- Cabeçalho -->
+        <header class="chat-header">
+            <h1>MiniChat AI</h1>
+            <p>Seu assistente com inteligência artificial</p>
+        </header>
+
+        <!-- Área de mensagens -->
+        <section
+            id="chat-messages"
+            class="chat-messages"
+            role="log"
+            aria-label="Mensagens da conversa"
+            aria-live="polite"
+            aria-relevant="additions"
+        >
+            <article class="message message--assistant">
+                <p>Olá! Como posso ajudar você hoje?</p>
+            </article>
+        </section>
+
+        <!-- Indicador de processamento -->
+        <p id="chat-status" role="status" hidden></p>
+
+        <!-- Formulário de envio -->
+        <form id="chat-form" class="chat-form">
+            <label for="chat-input">
+                Sua mensagem
+            </label>
+            <textarea
+                id="chat-input"
+                name="message"
+                placeholder="Digite sua mensagem..."
+                rows="2"
+                maxlength="2000"
+                required
+            ></textarea>
+            <button id="send-button" type="submit">
+                Enviar
+            </button>
+        </form>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+# Dependências
+node_modules/
+
+# Arquivos locais do Cloudflare
+.wrangler/
+.dev.vars*
+.env*
+
+# Arquivos gerados
+dist/
+
+# Arquivos do sistema
+.DS_Store
