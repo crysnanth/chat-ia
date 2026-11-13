@@ -89,3 +89,16 @@ form.addEventListener("submit", async (event) => {
         input.focus();
     }
 });
+
+
+// gabriel - implementação de funcionalidade de limpar a conversa ao clicar na lixeira!
+
+const clearButton = document.getElementById("clear-button");
+
+clearButton.addEventListener("click", () => {
+    clearButton.classList.add("limpar-animacao");
+
+    setTimeout(() => {
+        clearButton.classList.remove("limpar-animacao");
+    }, 500);
+});

@@ -1,73 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Chat CGJ</title>
-
+    <title>Chat JCG</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
-
 <body>
+
     <main class="chat-container">
-        <!-- Cabeçalho -->
+
         <header class="chat-header">
-            <h1>Chat CGJ</h1>
+
+            <h1>Chat JCG</h1>
+
             <p>Seu parceiro assistente de ideias, respostas e criatividade!</p>
 
+            <span class="chat-tag">INTELIGÊNCIA ARTIFICIAL</span>
 
-            <!-- Botão de limpar conversa -->
-            <div>
-                <button id="clear-button" title="Limpar conversa" aria-label="Limpar conversa">
-                    🗑️
-                    <p1>Limpar Conversa</p1>
-                </button>
-            </div>
         </header>
 
-        <!-- Área de mensagens -->
         <section
             id="chat-messages"
             class="chat-messages"
             role="log"
-            aria-label="Mensagens da conversa"
             aria-live="polite"
-            aria-relevant="additions"
         >
             <article class="message message--assistant">
-                <p>Olá! Sou o Chat CGJ criado por Crysnanth, Gabriel e Jhonatas. Como posso ajudar você hoje?</p>
+                Olá! Sou o Chat JCG, criado por Crysanth, Gabriel e Jhonatas.
+                Como posso ajudar você hoje?
             </article>
         </section>
 
-        <!-- Indicador de processamento -->
-        <p id="chat-status" role="status" hidden></p>
+        <div id="chat-status"></div>
 
-        <!-- Formulário de envio -->
         <form id="chat-form" class="chat-form">
-            <label for="chat-input">
-                Sua mensagem
-            </label>
+
+            <label for="chat-input">Sua mensagem</label>
+
             <textarea
                 id="chat-input"
-                name="message"
                 placeholder="Digite sua mensagem..."
-                rows="2"
-                maxlength="2000"
                 required
             ></textarea>
-            <button id="send-button" type="submit">
-                Enviar
-            </button>
+
+            <div class="chat-form-actions">
+
+                <button
+                    id="clear-button"
+                    type="button"
+                    aria-label="Limpar conversa"
+                    data-tooltip="Limpar conversa"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 6h18"></path>
+                        <path d="M8 6V4h8v2"></path>
+                        <path d="m19 6-1 14H6L5 6"></path>
+                        <path d="M10 11v5"></path>
+                        <path d="M14 11v5"></path>
+                    </svg>
+                </button>
+
+                <button id="send-button" type="submit">
+                    Enviar
+                </button>
+
+            </div>
+
         </form>
 
         <footer class="chat-footer">
-            <p><small> &copy; 2026 criado por Crysnanth, Gabriel e Jhonatas</small></p>
+            © 2026 Criado por Crysanth, Gabriel e Jhonatas
         </footer>
 
     </main>
-</body>
 
+</body>
 </html>
