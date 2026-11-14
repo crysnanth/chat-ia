@@ -80,52 +80,76 @@ chat-ia/
 
 **Importante:** o workflow copia `index.html`, `script.js` e `style.css` da **raiz** para `public/` antes de publicar. Portanto, edite os arquivos da **raiz**: eles são a fonte de verdade para o deploy automático.
 
-## Executar localmente
+## Como começar — integrantes do grupo
 
-### Pré-requisitos
+> **Você NÃO precisa criar conta na Cloudflare, instalar Wrangler, configurar tokens ou contratar uma API de IA para desenvolver o front-end.**
+> A integração com o Gemma 4 já está publicada na Cloudflare e é compartilhada pelo projeto.
 
-- Node.js e npm;
-- Python 3 (para servir o HTML localmente) ou outro servidor estático;
-- Conta gratuita da Cloudflare com acesso ao Workers AI;
-- Wrangler autenticado na conta que contém o Worker.
+Para trabalhar com **HTML, CSS e JavaScript**, basta ter **Git**, um **navegador** e um **servidor local de arquivos estáticos** (por exemplo, Python 3 ou Live Server).
 
-### Passo a passo
-
-1. Clone o repositório e instale as dependências:
+### 1. Baixar o projeto
 
 ```bash
 git clone https://github.com/crysnanth/chat-ia.git
 cd chat-ia
-npm ci
 ```
 
-2. Autentique o Wrangler, se necessário:
+### 2. Iniciar o site localmente
 
-```bash
-npx wrangler login
-```
-
-3. Inicie o Worker (terminal 1):
-
-```bash
-npx wrangler dev --port 8787
-```
-
-4. Inicie o front-end (terminal 2):
+Se tiver Python 3:
 
 ```bash
 python3 -m http.server 5501
 ```
 
-5. Abra **http://localhost:5501**.
+Abra **http://localhost:5501** no navegador.
 
-O `script.js` versionado utiliza o endereço HTTPS do Worker publicado. Para testar o Worker **local** com o navegador, altere temporariamente `WORKER_URL` em `script.js` para `http://localhost:8787`; não envie essa troca para a `main`. O arquivo `worker/index.js` deve autorizar a origem do seu servidor local na lista `allowedOrigins`.
+Também é possível usar a extensão Live Server do VS Code, **desde que configurada para a porta 5501**. A API do projeto já permite a origem `http://localhost:5501` (e `http://127.0.0.1:5501`). Outras portas podem ser bloqueadas por CORS.
 
-O binding Workers AI é executado na infraestrutura da Cloudflare durante o desenvolvimento e está sujeito à cota da conta.
+### 3. Testar e desenvolver
 
-### Testar a API local pelo terminal
+Envie uma pergunta no chat. O arquivo `script.js` já está configurado para consultar o **Worker público**:
 
-Com o Wrangler em execução:
+```javascript
+const WORKER_URL = "https://minichat-ai.crysnanth62.workers.dev";
+```
+
+Portanto:
+
+- **Não** é necessário executar `npx wrangler dev` para testar ou editar o front-end.
+- **Não** é necessário executar `npm ci` para trabalhar apenas com HTML, CSS e JavaScript do navegador.
+- **Não** é necessário cadastrar chave de API nem informar dados da conta Cloudflare.
+- É necessário ter **acesso à internet** para receber as respostas da IA.
+- O uso do chat compartilha a **cota gratuita e os limites de requisições** da conta Cloudflare administrada pelo responsável do projeto.
+
+**Atenção aos arquivos:** editem `index.html`, `style.css` e `script.js` da **raiz do repositório**. O GitHub Actions copia automaticamente esses arquivos para `public/` no momento do deploy.
+
+Para enviar alterações, criem uma branch, façam commit e abram um Pull Request para `main`. O processo de publicação é automático após o merge.
+
+## Manutenção da Cloudflare — somente para o responsável pela infraestrutura
+
+> Esta seção é **opcional para os demais integrantes**. Só precisa segui-la quem for administrar a API, testar alterações no código do Worker ou configurar uma infraestrutura própria.
+
+### Pré-requisitos de manutenção
+
+- Conta Cloudflare com acesso ao Workers AI e ao projeto;
+- Node.js e npm;
+- Wrangler autenticado na conta Cloudflare adequada.
+
+Para instalar as dependências e autenticar o Wrangler:
+
+```bash
+npm ci
+npx wrangler login
+```
+
+Para testar o Worker localmente:
+
+```bash
+npx wrangler dev --port 8787
+```
+
+Em outro terminal, é possível consultar a API local:
 
 ```bash
 curl -X POST http://localhost:8787 \
@@ -133,9 +157,13 @@ curl -X POST http://localhost:8787 \
   -d '{"messages":[{"role":"user","content":"Olá! Quem é você?"}]}'
 ```
 
-Uma resposta bem-sucedida contém a propriedade `reply`. A API aceita apenas `POST` com JSON; abrir a URL do Worker diretamente no navegador envia `GET` e resulta em `405 Method Not Allowed`.
+Para conectar temporariamente o navegador ao Worker **local**, altere `WORKER_URL` em `script.js` para `http://localhost:8787`. **Reverta essa mudança antes de enviar alterações para a `main`.** A origem local precisa estar autorizada em `worker/index.js`.
+
+O Workers AI utiliza a infraestrutura da Cloudflare também durante testes locais e está sujeito à cota da conta. A API aceita apenas requisições `POST` com JSON; abrir a URL do Worker diretamente em uma aba do navegador envia `GET` e retorna `405 Method Not Allowed`.
 
 ## Publicação automática
+
+**Os integrantes não precisam criar conta Cloudflare nem configurar tokens para publicar suas alterações.** O repositório já possui credenciais armazenadas como segredos do GitHub Actions, administradas pelo responsável da infraestrutura. O merge na `main` dispara o deploy existente.
 
 O GitHub Actions está definido em `.github/workflows/deploy.yml`.
 
@@ -143,7 +171,7 @@ O GitHub Actions está definido em `.github/workflows/deploy.yml`.
 - **Worker:** `npx wrangler deploy --config wrangler.jsonc`;
 - **Pages:** `npx wrangler pages deploy public --project-name=minichat-ai-web --branch=main`.
 
-Para configurar o deploy em um fork ou outra conta, cadastre estes **GitHub Actions secrets**:
+**Somente para quem estiver criando um fork com infraestrutura própria ou mantendo a configuração de deploy:** cadastre estes **GitHub Actions secrets**:
 
 | Secret | Conteúdo |
 | --- | --- |
