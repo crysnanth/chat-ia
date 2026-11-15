@@ -54,7 +54,13 @@ function addMessage(role, content) {
     }
 
     messages.appendChild(article);
-    messages.scrollTop = messages.scrollHeight;
+
+    // Rola até a mensagem mais recente,
+    // mantendo espaço para a barra de digitação
+    article.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+    });
 }
 
 // Função responsável pela resposta da IA

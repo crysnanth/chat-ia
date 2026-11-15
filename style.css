@@ -6,10 +6,10 @@
 
 body {
     min-height: 100vh;
-    padding: 50px 24px;
+    padding: 50px 24px 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background: #1f1f1e;
     color: #e8e6e1;
     font-family: Arial, Helvetica, sans-serif;
@@ -18,13 +18,15 @@ body {
 .chat-container {
     width: 100%;
     max-width: 1000px;
-    min-height: 85vh;
+    min-height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
     background: transparent;
+    overflow: visible;
 }
 
 .chat-header {
+    flex-shrink: 0;
     padding: 35px 20px 45px;
     text-align: center;
     background: transparent;
@@ -55,13 +57,15 @@ body {
     letter-spacing: 2px;
 }
 
+/* Área das mensagens */
+
 .chat-messages {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 18px;
     padding: 20px 0 30px;
-    overflow-y: auto;
+    overflow: visible;
     scroll-behavior: smooth;
 }
 
@@ -73,6 +77,7 @@ body {
     line-height: 1.7;
     overflow-wrap: anywhere;
     animation: aparecer 0.25s ease;
+    scroll-margin-bottom: 210px;
 }
 
 .message--assistant {
@@ -148,25 +153,13 @@ body {
     }
 }
 
-.chat-messages::-webkit-scrollbar {
-    width: 5px;
-}
-
-.chat-messages::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.chat-messages::-webkit-scrollbar-thumb {
-    background: #555b60;
-    border-radius: 10px;
-}
-
-.chat-messages::-webkit-scrollbar-thumb:hover {
-    background: #6689a8;
-}
+/* Formulário de mensagem fixo */
 
 .chat-form {
-    position: relative;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -189,7 +182,7 @@ body {
 .chat-form textarea {
     width: 100%;
     min-height: 85px;
-    resize: vertical;
+    resize: none;
     padding: 0;
     border: none;
     outline: none;
@@ -210,6 +203,8 @@ body {
     justify-content: flex-end;
     gap: 12px;
 }
+
+/* Botão da lixeira */
 
 #clear-button {
     position: relative;
@@ -283,6 +278,8 @@ body {
     background: #382323;
 }
 
+/* Botão enviar */
+
 #send-button {
     min-width: 90px;
     padding: 11px 22px;
@@ -307,14 +304,21 @@ body {
     cursor: not-allowed;
 }
 
+/* Status da conversa */
+
 #chat-status {
-    padding: 15px 5px;
+    position: relative;
+    z-index: 101;
+    padding: 10px 5px 20px;
+    margin-bottom: 5px;
     color: #82a4c0;
     font-size: 13px;
 }
 
+/* Rodapé */
+
 .chat-footer {
-    padding: 25px 10px;
+    padding: 12px 10px 5px;
     text-align: center;
     background: transparent;
     border: none;
@@ -428,14 +432,16 @@ body {
     cursor: not-allowed;
 }
 
+/* Responsividade */
+
 @media (max-width: 600px) {
     body {
-        padding: 15px;
-        align-items: stretch;
+        padding: 15px 15px 5px;
+        align-items: flex-start;
     }
 
     .chat-container {
-        min-height: calc(100vh - 30px);
+        min-height: calc(100vh - 20px);
     }
 
     .chat-header {
@@ -470,7 +476,7 @@ body {
     }
 
     .chat-footer {
-        padding: 20px 5px;
+        padding: 10px 5px 3px;
     }
 
     .modal-content {
