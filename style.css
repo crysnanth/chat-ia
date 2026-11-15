@@ -214,12 +214,15 @@ body {
     pointer-events: none;
     z-index: 10;
 }
+
 #clear-button:hover::after,
 #clear-button:focus-visible::after {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
 }
+
+/* Animação vermelha da lixeira */
 
 #clear-button.limpar-animacao {
     color: #ff4d4d;
@@ -272,6 +275,112 @@ body {
     font-size: 12px;
 }
 
+/* Modal de confirmação */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    animation: aparecer 0.2s ease;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: #2c2c2b;
+    border: 1px solid #393938;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.modal-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #40566b;
+    border-radius: 50%;
+    color: #82a4c0;
+}
+
+.modal-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.modal-content h2 {
+    margin-bottom: 12px;
+    color: #e8e6e1;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.modal-content p {
+    color: #a6a39e;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    border: 1px solid #40566b;
+    border-radius: 20px;
+    background: transparent;
+    color: #82a4c0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#cancel-delete:hover {
+    background: #263442;
+    border-color: #6689a8;
+    color: #ffffff;
+}
+
+#confirm-delete {
+    border-color: #a94747;
+    color: #ff7777;
+}
+
+#confirm-delete:hover {
+    background: rgba(255, 77, 77, 0.12);
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+}
+
+#confirm-delete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
     body {
         padding: 15px;
@@ -315,5 +424,13 @@ body {
 
     .chat-footer {
         padding: 20px 5px;
+    }
+
+    .modal-content {
+        padding: 25px 20px;
+    }
+
+    .modal-actions {
+        gap: 8px;
     }
 }
