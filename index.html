@@ -38,39 +38,50 @@
             </article>
         </section>
 
-        <div id="chat-status" hidden></div>
+        <!-- Área fixa do status e formulário -->
 
-        <form id="chat-form" class="chat-form">
+        <div class="chat-input-area">
 
-            <textarea
-                id="chat-input"
-                placeholder="Digite sua mensagem..."
-                required
-            ></textarea>
+            <div
+                id="chat-status"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></div>
 
-            <div class="chat-form-actions">
+            <form id="chat-form" class="chat-form">
 
-                <button
-                    id="clear-button"
-                    type="button"
-                    aria-label="Limpar conversa"
-                    data-tooltip="Limpar conversa"
-                >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 6h18"></path>
-                        <path d="M8 6V4h8v2"></path>
-                        <path d="m19 6-1 14H6L5 6"></path>
-                        <path d="M10 11v5"></path>
-                        <path d="M14 11v5"></path>
-                    </svg>
-                </button>
+                <textarea
+                    id="chat-input"
+                    placeholder="Digite sua mensagem..."
+                    required
+                ></textarea>
 
-                <button id="send-button" type="submit">
-                    Enviar
-                </button>
+                <div class="chat-form-actions">
 
-            </div>
-        </form>
+                    <button
+                        id="clear-button"
+                        type="button"
+                        aria-label="Limpar conversa"
+                        data-tooltip="Limpar conversa"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 6h18"></path>
+                            <path d="M8 6V4h8v2"></path>
+                            <path d="m19 6-1 14H6L5 6"></path>
+                            <path d="M10 11v5"></path>
+                            <path d="M14 11v5"></path>
+                        </svg>
+                    </button>
+
+                    <button id="send-button" type="submit">
+                        Enviar
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
 
         <!-- Janela de confirmação de exclusão -->
 
@@ -109,17 +120,11 @@
 
                 <div class="modal-actions">
 
-                    <button
-                        id="cancel-delete"
-                        type="button"
-                    >
+                    <button id="cancel-delete" type="button">
                         Cancelar
                     </button>
 
-                    <button
-                        id="confirm-delete"
-                        type="button"
-                    >
+                    <button id="confirm-delete" type="button">
                         Sim, excluir
                     </button>
 

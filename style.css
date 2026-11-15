@@ -106,12 +106,31 @@ body {
     }
 }
 
-/* Formulário de mensagem fixo */
+/* Área fixa do status e formulário */
 
-.chat-form {
+.chat-input-area {
     position: sticky;
     bottom: 0;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Status da conversa */
+
+#chat-status {
+    position: relative;
+    padding: 8px 5px;
+    margin: 0 25px;
+    color: #82a4c0;
+    font-size: 13px;
+}
+
+/* Formulário de mensagem */
+
+.chat-form {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -255,19 +274,6 @@ body {
 #send-button:disabled {
     opacity: 0.4;
     cursor: not-allowed;
-}
-
-/* Status da conversa */
-
-#chat-status {
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 25px;
-    z-index: 101;
-    padding: 8px 5px;
-    margin: 0;
-    color: #82a4c0;
-    font-size: 13px;
 }
 
 /* Rodapé */
