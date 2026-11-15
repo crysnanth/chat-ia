@@ -106,8 +106,9 @@ form.addEventListener("submit", async (event) => {
     input.value = "";
     sendButton.disabled = true;
 
+    // Exibe o status enquanto a IA responde
     status.hidden = false;
-    status.textContent = "IA está digitando...";
+    status.textContent = "IA está pensando...";
 
     try {
         const reply = await getAIResponse();
@@ -127,6 +128,7 @@ form.addEventListener("submit", async (event) => {
         );
 
     } finally {
+        // Esconde o status após a resposta
         status.hidden = true;
         sendButton.disabled = false;
         input.focus();
