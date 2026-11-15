@@ -6,6 +6,14 @@ const messages = document.getElementById("chat-messages");
 const sendButton = document.getElementById("send-button");
 const status = document.getElementById("chat-status");
 
+// Envia a mensagem ao pressionar Enter
+input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+    }
+});
+
 // Elementos da exclusão
 const clearButton = document.getElementById("clear-button");
 const deleteModal = document.getElementById("delete-modal");
@@ -123,7 +131,6 @@ clearButton.addEventListener("click", () => {
     cancelDelete.focus();
 });
 
-
 // Fecha a janela ao clicar em cancelar
 cancelDelete.addEventListener("click", () => {
 
@@ -131,7 +138,6 @@ cancelDelete.addEventListener("click", () => {
 
     clearButton.focus();
 });
-
 
 // Confirma a exclusão da conversa
 confirmDelete.addEventListener("click", () => {
@@ -159,9 +165,7 @@ confirmDelete.addEventListener("click", () => {
 
     // Retorna o foco para a lixeira
     clearButton.focus();
-
 });
-
 
 // Fecha a janela ao clicar fora dela
 deleteModal.addEventListener("click", (event) => {
@@ -172,9 +176,7 @@ deleteModal.addEventListener("click", (event) => {
 
         clearButton.focus();
     }
-
 });
-
 
 // Fecha a janela ao pressionar ESC
 document.addEventListener("keydown", (event) => {
@@ -185,5 +187,4 @@ document.addEventListener("keydown", (event) => {
 
         clearButton.focus();
     }
-
 });
