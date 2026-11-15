@@ -35,14 +35,25 @@ function animateTrash() {
 // Adiciona uma mensagem na tela
 function addMessage(role, content) {
     const article = document.createElement("article");
-    const paragraph = document.createElement("p");
-
     article.className = `message message--${role}`;
-    paragraph.textContent = content;
+    
+    if (role === "assistant") {
+        const markdown = typeof content === "string" ? content : String(content ?? "");
 
-    article.appendChild(paragraph);
+        if (window.marked?.parse && window.DOMPurify?.sanitize) {
+            article.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+        } else {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = markdown;
+            article.appendChild(paragraph);
+        }
+    } else {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = content;
+        article.appendChild(paragraph);
+    }
+
     messages.appendChild(article);
-
     messages.scrollTop = messages.scrollHeight;
 }
 

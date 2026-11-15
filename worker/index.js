@@ -128,7 +128,7 @@ export default {
                 {
                     role: "system",
                     content:
-                        "Você é o MiniChat AI, um assistente amigável. " +
+                        "Você é o CHAT JCG AI, um assistente amigável. " +
                         "Responda em português brasileiro de maneira " +
                         "clara, objetiva e preferencialmente breve."
                 },
