@@ -260,7 +260,10 @@ body {
 /* Status da conversa */
 
 #chat-status {
-    padding: 15px 5px;
+    position: relative;
+    z-index: 101;
+    padding: 10px 5px 20px;
+    margin-bottom: 5px;
     color: #82a4c0;
     font-size: 13px;
 }
