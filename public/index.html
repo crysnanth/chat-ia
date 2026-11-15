@@ -1,59 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MiniChat AI</title>
+    <title>Chat JCG</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 
 <body>
+
     <main class="chat-container">
-        <!-- Cabeçalho -->
+
         <header class="chat-header">
-            <h1>MiniChat AI</h1>
-            <p>Seu assistente com inteligência artificial</p>
+            <h1>Chat JCG</h1>
+
+            <p>
+                Seu parceiro assistente de ideias, respostas e criatividade!
+            </p>
+
+            <span class="chat-tag">
+                INTELIGÊNCIA ARTIFICIAL
+            </span>
         </header>
 
-        <!-- Área de mensagens -->
         <section
             id="chat-messages"
             class="chat-messages"
             role="log"
-            aria-label="Mensagens da conversa"
             aria-live="polite"
-            aria-relevant="additions"
         >
             <article class="message message--assistant">
-                <p>Olá! Como posso ajudar você hoje?</p>
+                Olá! Sou o Chat JCG. <br>
+                Como posso ajudar você hoje?
             </article>
         </section>
 
-        <!-- Indicador de processamento -->
-        <p id="chat-status" role="status" hidden></p>
+        <div id="chat-status" hidden></div>
 
-        <!-- Formulário de envio -->
         <form id="chat-form" class="chat-form">
-            <label for="chat-input">
-                Sua mensagem
-            </label>
+
             <textarea
                 id="chat-input"
-                name="message"
                 placeholder="Digite sua mensagem..."
-                rows="2"
-                maxlength="2000"
                 required
             ></textarea>
-            <button id="send-button" type="submit">
-                Enviar
-            </button>
-        </form>
-    </main>
-</body>
 
+            <div class="chat-form-actions">
+
+                <button
+                    id="clear-button"
+                    type="button"
+                    aria-label="Limpar conversa"
+                    data-tooltip="Limpar conversa"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 6h18"></path>
+                        <path d="M8 6V4h8v2"></path>
+                        <path d="m19 6-1 14H6L5 6"></path>
+                        <path d="M10 11v5"></path>
+                        <path d="M14 11v5"></path>
+                    </svg>
+                </button>
+
+                <button id="send-button" type="submit">
+                    Enviar
+                </button>
+
+            </div>
+        </form>
+
+        <!-- Janela de confirmação de exclusão -->
+
+        <div
+            id="delete-modal"
+            class="modal-overlay"
+            role="presentation"
+            hidden
+        >
+            <div
+                class="modal-content"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+
+                <div class="modal-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 6h18"></path>
+                        <path d="M8 6V4h8v2"></path>
+                        <path d="m19 6-1 14H6L5 6"></path>
+                        <path d="M10 11v5"></path>
+                        <path d="M14 11v5"></path>
+                    </svg>
+                </div>
+
+                <h2 id="modal-title">
+                    Excluir conversa?
+                </h2>
+
+                <p id="modal-description">
+                    Tem certeza de que deseja apagar esta conversa?
+                    Essa ação não poderá ser desfeita.
+                </p>
+
+                <div class="modal-actions">
+
+                    <button
+                        id="cancel-delete"
+                        type="button"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        id="confirm-delete"
+                        type="button"
+                    >
+                        Sim, excluir
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <footer class="chat-footer">
+            © 2026 Desenvolvido por Crysnanth, Gabriel e Jhonatas
+        </footer>
+
+    </main>
+
+</body>
 </html>
